@@ -1,0 +1,7 @@
+.expoLogoBackground {
+  /* colors.primary -> colors.primaryBright from src/styles/global.ts (CSS can't import TS) */
+  background-image: linear-gradient(180deg, #298fc2, #1900ff);
+  border-radius: 40px;
+  width: 128px;
+  height: 128px;
+}

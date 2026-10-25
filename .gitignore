@@ -426,3 +426,23 @@ FodyWeavers.xsd
 
 # Official VS Code C# Dev Kit Extension exclusion
 #*.lscache
+
+# Expo / React Native
+.expo/
+dist/
+web-build/
+expo-env.d.ts
+.env*.local
+.metro-health-check*
+*.tsbuildinfo
+/ios
+/android
+*.jks
+*.p8
+*.p12
+*.key
+*.pem
+*.mobileprovision
+
+# Secrets
+backend/appsettings.json
