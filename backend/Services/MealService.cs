@@ -21,7 +21,6 @@ public class MealService : IMealService
 
         await connection.OpenAsync();
 
-        // One row per food in each meal (LEFT JOIN keeps meals with no foods).
         const string sql = """
             SELECT m.mealId, m.userId, m.mealType, m.date,
                    fi.food_item, fi.servings,
@@ -56,7 +55,6 @@ public class MealService : IMealService
         {
             int mealId = reader.GetInt32("mealId");
 
-            // Rows are ordered by meal, so a new mealId starts a new meal
             if (current == null || current.MealId != mealId)
             {
                 current = new Meal
@@ -72,7 +70,6 @@ public class MealService : IMealService
             if (reader.IsDBNull(reader.GetOrdinal("food_item")))
                 continue;
 
-            // Foods' numbers are per serving, so multiply by servings
             float servings = Number("servings");
             current.Foods.Add(new MealFood
             {
@@ -103,7 +100,6 @@ public class MealService : IMealService
 
     try
     {
-        // Insert the meal
         const string sql = """
             INSERT INTO meals (userId, mealType, date)
             VALUES (@userId, @mealType, @date)
@@ -122,7 +118,6 @@ public class MealService : IMealService
             mealId = checked((int)command.LastInsertedId);
         }
 
-        // Insert each food instance
         const string foodSql = """
             INSERT INTO food_instance (mealId, food_item, servings)
             VALUES (@mealId, @foodItem, @servings)
